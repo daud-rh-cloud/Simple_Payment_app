@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transactions</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  {#
+    Page: GET /transactions   (read only, no form)
+    Variables:
+      transactions - a list, newest first. Each item has:
+        date          - e.g. "2026-11-15 12:30"
+        type          - "Sent" or "Received" (decide this in Python)
+        other_account - the other side's account number
+        amount        - e.g. "250.00"
+  #}
+
+  <main class="card wide">
+    <h1>All transactions</h1>
+
+    {% if transactions %}
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Account</th>
+          <th class="amount">Amount (kr)</th>
+        </tr>
+        {% for t in transactions %}
+          <tr>
+            <td>{{ t.date }}</td>
+            <td class="{{ 'sent' if t.type == 'Sent' else 'received' }}">{{ t.type }}</td>
+            <td>{{ t.other_account }}</td>
+            <td class="amount">{{ t.amount }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p class="empty">No transactions yet.</p>
+    {% endif %}
+
+    <p class="footer-link"><a href="/home">Back to home</a></p>
+  </main>
+</body>
+</html>

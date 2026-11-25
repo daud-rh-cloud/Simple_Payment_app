@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  {#
+    Page: GET /login   (form sends POST /login)
+    Variables (all optional):
+      error   - text shown when login fails, e.g. "Wrong username or password"
+      message - text shown after register, e.g. "Account created. Please log in."
+    Form fields sent to Python:
+      username, password
+  #}
+
+  <main class="card">
+    <h1>Login</h1>
+
+    {% if message %}
+      <p class="message">{{ message }}</p>
+    {% endif %}
+    
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+  {# send the POST request to the /login  -> puten in a form and cashing the user-input#}
+    <form method="post" action="/login">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="footer-link">No account? <a href="/register">Register</a></p>
+  </main>
+</body>
+</html>

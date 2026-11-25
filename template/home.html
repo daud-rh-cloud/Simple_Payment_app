@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  {#
+    Page: GET /home   (needs a valid login JWT TOKEN / cookie )
+    Variables:
+      username       - e.g. "ali"
+      account_number - e.g. "1001"
+      balance        - e.g. "1200.00" (format it in Python)
+      message        - optional, e.g. "Transfer sent." after a transfer
+  #}
+
+  <main class="card">
+    <h1>Welcome {{ username }}</h1>
+
+    {% if message %}
+      <p class="message">{{ message }}</p>
+    {% endif %}
+
+    <div class="account-info">
+      <p class="account-number">Account Nummer : {{ account_number }}</p>
+      <p class="balance">balance: {{ balance }} kr</p>
+    </div>
+
+    <div class="actions">
+      <a class="button" href="/transfer">Make a transfer</a>
+      <a class="button secondary" href="/transactions">View all transactions</a>
+    </div>
+
+    <form method="post" action="/logout">
+      <button type="submit" class="secondary">Logout</button>
+    </form>
+  </main>
+</body>
+</html>

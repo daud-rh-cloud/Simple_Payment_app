@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+
+  {#
+    Page: GET /register   (form sends POST /register)
+    Variables (optional):
+      error - text shown when register fails, e.g. "Username already taken"
+    Form fields sent to Python:
+      username, password, password_confirm
+    On success Python should redirect to /login (303).
+  #}
+
+  <main class="card">
+    <h1>Create account</h1>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {# Makes a later Post req to the /register#}
+
+    <form method="post" action="/register">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required minlength="3" maxlength="30">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="8">
+
+      <label for="password_confirm">Repeat password</label>
+      <input type="password" id="password_confirm" name="password_confirm" required minlength="8">
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p class="footer-link">Already have an account? <a href="/login">Login</a></p>
+  </main>
+</body>
+</html>
